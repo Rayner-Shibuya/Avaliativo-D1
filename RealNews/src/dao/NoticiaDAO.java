@@ -86,7 +86,7 @@ public class NoticiaDAO {
 	}
 	
 	public List<Noticia> pegaNoticias() {
-		String sqlLista = "SELECT titulo FROM noticia";
+		String sqlLista = "SELECT * FROM noticia";
 		Noticia noticia;
 		List<Noticia> lista = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.obtemConexao();
@@ -94,7 +94,11 @@ public class NoticiaDAO {
 			try (ResultSet rs = stm.executeQuery();) {
 				while (rs.next()) {
 					noticia = new Noticia();
-					noticia.setTitulo(rs.getString(1));
+					noticia.setId(rs.getInt(1));
+					noticia.setDescricao(rs.getString(2));
+					noticia.setTitulo(rs.getString(3));
+					noticia.setTexto(rs.getString(4));
+					
 					lista.add(noticia);
 
 				}

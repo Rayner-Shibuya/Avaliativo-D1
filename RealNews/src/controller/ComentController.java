@@ -44,8 +44,7 @@ public class ComentController extends HttpServlet {
 		ComentarioService cs = new ComentarioService();
 		cs.criar(comentario);
 		
-		response.sendRedirect("http://localhost:8080/RealNews/noticia.jsp");
-
+		response.sendRedirect("http://localhost:8080/RealNews/noticia.jsp?id="+ comentario.getNoticia_id());
 		
 //		PrintWriter out = response.getWriter();
 //		out.println("<html><head><title>comentario Cadastrada</title></head><body>");

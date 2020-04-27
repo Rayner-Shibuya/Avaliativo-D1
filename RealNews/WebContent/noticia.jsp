@@ -75,8 +75,10 @@ textarea {
 			<%
 				Noticia noticia = new Noticia();
 				NoticiaService ns = new NoticiaService();
-				noticia = ns.carregar(9);
+				int id = Integer.parseInt(request.getParameter("id"));
+				noticia = ns.carregar(id);
 				String titulo = noticia.getTitulo();
+      			out.println(request.getParameter("id"));
 			%>
 			<h1><%=titulo%></h1>
 
@@ -124,8 +126,8 @@ textarea {
 				<input type="text" name="nome"></input>
 				<label for="com_texto"> Comentários:</label>
 				<textarea name="com_texto"> </textarea>
-				<input name="noticia_id" value=<%=noticia_ID%>> <input
-					type="submit">
+				<input name="noticia_id" value=<%=noticia_ID%>>
+				<input type="submit">
 			</form>
 			
 			<a href="Menu.html">Menu</a>
