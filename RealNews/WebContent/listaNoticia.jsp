@@ -28,10 +28,11 @@
 				noticia = lista_noticia.next();
 			
 			%>
+			
 			<p><%=noticia.getTitulo()%>
-			<a href="noticia.jsp?id=<%=noticia.getId()%>">Open</a>
-			<a href="cadastraNoticia.jsp?comando=<c:out value=<%=noticia_ID%>/>">Edit</a>
-			<a href="deletaNoticia.jsp">Delete</a>
+			<a href="noticia.jsp?id=<%=noticia.getId()%>"><button type="button">Abrir</button></a>
+			<a href="Noticia.do?comando=<%="edita"%>&id=<%=noticia.getId()%>"><button type="button">Editar</button></a>
+			<a href="Noticia.do?comando=<%="delete"%>&id=<%=noticia.getId()%>"><button type="button">Deletar</button></a>
 			</p>
 			<%}%>
 </div>

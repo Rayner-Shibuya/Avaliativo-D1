@@ -22,6 +22,10 @@ public class ComentarioService {
 		dao.excluir(id);
 	}
 	
+	public void excluirTodas(int noticia_id) {
+		dao.excluirTodas(noticia_id);
+	}
+	
 	public Comentario carregar(int id){
 		return dao.carregar(id);
 	}

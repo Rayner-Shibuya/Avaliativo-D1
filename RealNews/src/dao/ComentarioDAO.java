@@ -46,6 +46,17 @@ public class ComentarioDAO {
 		}
 	}
 
+	public void excluirTodas(int id) {
+		String sqlDelete = "DELETE FROM comentario WHERE fk_noticia_id = ?";
+		try (Connection conn = ConnectionFactory.obtemConexao();
+				PreparedStatement stm = conn.prepareStatement(sqlDelete);) {
+			stm.setInt(1, id);
+			stm.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void excluir(int id) {
 		String sqlDelete = "DELETE FROM comentario WHERE id = ?";
 		try (Connection conn = ConnectionFactory.obtemConexao();

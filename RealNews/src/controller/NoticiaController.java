@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Comentario;
 import model.Noticia;
+import service.ComentarioService;
 import service.NoticiaService;
 
 /**
@@ -21,16 +23,9 @@ public class NoticiaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Noticia noticia;
-	NoticiaService cs;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
+	NoticiaService ns;
+	Comentario comentario;
+	ComentarioService cs;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -38,7 +33,37 @@ public class NoticiaController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doGet(request, response);
 
+	}
+	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String pComando = request.getParameter("comando");
+		
+		switch (pComando) {
+		case "criar":
+			cadastraNoticia(request, response);
+			break;
+		case "edita":
+			atualizaNoticia(request, response);
+			break;
+		case "delete":
+			deletaNoticia(request, response);
+			break;
+		
+		}
+	}
+		
+		
+	private void cadastraNoticia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	
 		String pDescricao = request.getParameter("descricao");
 		String pTitulo = request.getParameter("titulo");
 		String pTexto = request.getParameter("texto");
@@ -51,9 +76,9 @@ public class NoticiaController extends HttpServlet {
 			noticia.setTexto(pTexto);
 
 			// instanciar o service
-			cs = new NoticiaService();
-			cs.criar(noticia);
-			noticia = cs.carregar(noticia.getId());
+			ns = new NoticiaService();
+			ns.criar(noticia);
+			noticia = ns.carregar(noticia.getId());
 
 			RequestDispatcher view = request.getRequestDispatcher("listaNoticia.jsp");
 			view.forward(request, response);
@@ -66,7 +91,29 @@ public class NoticiaController extends HttpServlet {
 			out.println("<a href=" + "Menu.html" + ">Menu</a>");
 			out.println("</body></html>");
 		}
-
 	}
+	
+	
+	private void atualizaNoticia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String pId = request.getParameter("id");
+
+		
+	}
+	
+	private void deletaNoticia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String pId = request.getParameter("id");
+		int id = Integer.parseInt(pId);
+		cs = new ComentarioService();
+		ns = new NoticiaService();
+		
+		cs.excluirTodas(id);
+		ns.excluir(id);
+		RequestDispatcher view = request.getRequestDispatcher("deletaNoticia.jsp");
+		view.forward(request, response);
+	}
+
 
 }
