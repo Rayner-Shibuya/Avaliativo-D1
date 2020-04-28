@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cliente</title>
+<title>Lista de noticias</title>
 </head>
 <body>
 
@@ -30,8 +30,8 @@
 			%>
 			<p><%=noticia.getTitulo()%>
 			<a href="noticia.jsp?id=<%=noticia.getId()%>">Open</a>
-			<a href="editaNoticia.jsp?id=<c:out value=<%=noticia_ID%>/>">Edit</a>
-			<a href="cadastraNoticia?id=<c:out value=<%=noticia_ID%>/>">Delete</a>
+			<a href="cadastraNoticia.jsp?comando=<c:out value=<%=noticia_ID%>/>">Edit</a>
+			<a href="deletaNoticia.jsp">Delete</a>
 			</p>
 			<%}%>
 </div>
