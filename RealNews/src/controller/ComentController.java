@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 //import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Comentario;
+import model.Noticia;
 import service.ComentarioService;
+import service.NoticiaService;
 
 /**
  * Servlet implementation class ComentController
@@ -43,8 +46,12 @@ public class ComentController extends HttpServlet {
 		//instanciar o service
 		ComentarioService cs = new ComentarioService();
 		cs.criar(comentario);
+		NoticiaService ns = new NoticiaService();
+		Noticia noticia = ns.carregar(Integer.parseInt(pNoticia_id));
 		
-		response.sendRedirect("http://localhost:8080/RealNews/noticia.jsp?id="+ comentario.getNoticia_id());
+		request.setAttribute("noticia", noticia);
+		RequestDispatcher view = request.getRequestDispatcher("noticia.jsp");
+		view.forward(request, response);
 		
 //		PrintWriter out = response.getWriter();
 //		out.println("<html><head><title>comentario Cadastrada</title></head><body>");

@@ -30,7 +30,7 @@
 			%>
 			
 			<p><%=noticia.getTitulo()%>
-			<a href="noticia.jsp?id=<%=noticia.getId()%>"><button type="button">Abrir</button></a>
+			<a href="Noticia.do?comando=<%="carrega"%>&id=<%=noticia.getId()%>"><button type="button">Abrir</button></a>
 			<a href="Noticia.do?comando=<%="edita"%>&id=<%=noticia.getId()%>"><button type="button">Editar</button></a>
 			<a href="Noticia.do?comando=<%="delete"%>&id=<%=noticia.getId()%>"><button type="button">Deletar</button></a>
 			</p>

@@ -70,24 +70,16 @@ textarea {
 
 </head>
 <body>
+	<%Noticia noticia= (Noticia)request.getAttribute("noticia"); %>
+	
+	
 	<div class="container">
 		<div class="news">
-			<%
-				Noticia noticia = new Noticia();
-				NoticiaService ns = new NoticiaService();
-				int id = Integer.parseInt(request.getParameter("id"));
-				noticia = ns.carregar(id);
-				String titulo = noticia.getTitulo();
-			%>
-			<h1><%=titulo%></h1>
-
-		</div>
-
-		<div class="news">
-			<%
-				String descricao = noticia.getDescricao();
-			%>
-			<h2><%=descricao%></h2>
+			
+			
+			<h1><%=noticia.getTitulo()%></h1>
+			
+			<h2><%=noticia.getDescricao()%></h2>
 		</div>
 
 		<div class="noticia">
@@ -101,7 +93,6 @@ textarea {
 		<div class="coments">
 			<%
 				String conteudo = "";
-				int noticia_ID = noticia.getId();
 				Comentario comentario = new Comentario();
 				ComentarioService cs = new ComentarioService();
 				List<Comentario> lista = cs.pegaComentarios(noticia.getId());
@@ -125,7 +116,7 @@ textarea {
 				<input type="text" name="nome"></input>
 				<label for="com_texto"> Comentários:</label>
 				<textarea name="com_texto"> </textarea>
-				<input type= "hidden" name="noticia_id" value=<%=noticia_ID%>>
+				<input type= "hidden" name="noticia_id" value=<%=noticia.getId()%>>
 				<input type="submit">
 			</form>
 			
